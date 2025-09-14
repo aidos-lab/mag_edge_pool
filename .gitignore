@@ -1,0 +1,4 @@
+examples/results/
+data/
+mag_edge_pool/src/__pycache__/
+mag_edge_pool/__pycache__/

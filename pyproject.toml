@@ -1,0 +1,38 @@
+[tool.poetry]
+name = "mag-edge-pool"
+version = "0.1.0"
+description = ""
+authors = ["LimbeckKat <k.limbeck@hotmail.com>"]
+readme = "README.md"
+packages = [{include = "mag_edge_pool"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+networkx = "^3.4.2"
+magnipy = {git = "https://github.com/aidos-lab/magnipy.git"}
+tqdm = "^4.67.1"
+pot = "^0.9.5"
+rdkit = "^2024.9.5"
+pdoc = "^15.0.1"
+kneed = "^0.8.5"
+dcor = "^0.6"
+pyg-lib = {version = "^0.4.0+pt25cu124", source = "torch-wheels"}
+torch-scatter = {version = "^2.1.2+pt25cu124", source = "torch-wheels"}
+torch-sparse = {version = "^0.6.18+pt25cu124", source = "torch-wheels"}
+torch = "2.5.0"
+torch-geometric = "^2.6.1"
+pygsp = "^0.5.1"
+torch-cluster = "^1.6.3+pt25cu124"
+
+[[tool.poetry.source]]
+name = "torch-wheels"
+url = "https://data.pyg.org/whl/torch-2.5.0+cu124.html"
+default = false
+secondary = false
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.black]
+line-length = 79
