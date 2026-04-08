@@ -369,7 +369,7 @@ def mag_edge_pool_transform(dataset_sparse, pooling_method, ratio, metric, mag_m
 
         g = to_networkx(data, to_undirected=True)
         n_steps = int(round((1-ratio) * data.num_nodes))
-        if ratio > 0.5:
+        if ratio < 0.5:
             this_graph, S, cluster = mag_edge_pool_repeated(g, ts=[1], dist_fn=dist_fn, original_magni=None, n_steps=n_steps, method=mag_method, scores_method = scores_method, k=cluster_index)
         else:
             this_graph, S, cluster = mag_edge_pool(g, ts=[1], dist_fn=dist_fn, original_magni=None, n_steps=n_steps, method=mag_method, scores_method = scores_method, k=cluster_index)
