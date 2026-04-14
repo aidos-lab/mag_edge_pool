@@ -162,6 +162,24 @@ def get_scores_edge_approx_dist(this_graph, edges, dist_fn, ts, original_magni, 
         scores.append(mag_diff_this)
     return scores
 
+def assignment_to_clusters(S):
+    # Assuming S is the array (m rows, n columns)
+    # S is already defined in previous cells
+
+    # Get indices where S is nonzero
+    rows, cols = np.where(S != 0)
+
+    # Initialize list of lists for each column
+    assignment = [[] for _ in range(S.shape[1])]
+
+    # Populate the assignment list
+    for r, c in zip(rows, cols):
+        assignment[c].append(r)
+
+    assignment = np.array(assignment)
+    assignment = assignment.squeeze()
+    return assignment
+
 def mag_edge_pool(g, ts, dist_fn, original_magni=None, n_steps=None, method="cholesky", scores_method ="full", k=0):
     """
     The algorithm for MagEdgePool and SpreadEdgePool. Uses the magnitude difference after 
@@ -268,8 +286,8 @@ def mag_edge_pool(g, ts, dist_fn, original_magni=None, n_steps=None, method="cho
     # Normalize each row in S by its sum
     row_sums = S.sum(axis=1, keepdims=True)
     S = S / row_sums
-
-    cluster = np.where(S != 0)[0] + k
+    
+    cluster = assignment_to_clusters(S)+k
 
     return this_graph, S, cluster
 
@@ -326,7 +344,7 @@ def mag_edge_pool_repeated(g, ts, dist_fn, original_magni=None, n_steps=None, me
 
         S = np.dot(S_new, S)
 
-        cluster = np.where(S != 0)[0] + k
+        cluster = assignment_to_clusters(S)+k #np.where(S != 0)[0] + k
 
     return this_graph, S, cluster
 
